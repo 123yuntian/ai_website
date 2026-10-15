@@ -1,5 +1,5 @@
 let timerInterval;
-let timeLeft = 25 * 60; // 25分钟，单位为秒
+let timeLeft = 30 * 60; // 30分钟，单位为秒
 let isRunning = false;
 
 function updateDisplay() {
@@ -24,7 +24,7 @@ function startTimer() {
             isRunning = false;
             document.getElementById('startBtn').disabled = false;
             document.getElementById('pauseBtn').disabled = true;
-            alert('休息时间到了！你已经学习了25分钟，记得休息一下！');
+            alert('休息时间到了！你已经学习了30分钟，记得休息一下！');
         }
     }, 1000);
 }
@@ -40,7 +40,7 @@ function pauseTimer() {
 function resetTimer() {
     clearInterval(timerInterval);
     isRunning = false;
-    timeLeft = 25 * 60;
+    timeLeft = 30 * 60;
     updateDisplay();
     document.getElementById('startBtn').disabled = false;
     document.getElementById('pauseBtn').disabled = true;
