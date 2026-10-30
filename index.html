@@ -57,5 +57,55 @@
     </section>
 
     <script src="script.js"></script>
+
+    <script>
+        (function () {
+            var originalTitle = document.title; // 运行时读取，避免硬编码「余健琦 · 机械×AI」
+            var display = document.getElementById('timerDisplay');
+            var pauseBtn = document.getElementById('pauseBtn');
+            var syncId = null;
+
+            function readTime() {
+                var t = (display.textContent || '').trim();
+                return /^\d{1,2}:\d{2}$/.test(t) ? t : null;
+            }
+
+            function stopSync() {
+                if (syncId !== null) { clearInterval(syncId); syncId = null; }
+            }
+
+            function restoreTitle() {
+                stopSync();
+                document.title = originalTitle;
+            }
+
+            function startSync() {
+                stopSync();
+                var t = readTime();
+                if (t && t !== '00:00') document.title = t + ' · 番茄钟';
+                syncId = setInterval(function () {
+                    if (pauseBtn.disabled) { restoreTitle(); return; } // 到点自动停的兜底
+                    var cur = readTime();
+                    if (cur === null || cur === '00:00') { restoreTitle(); return; }
+                    document.title = cur + ' · 番茄钟';
+                }, 300);
+            }
+
+            function wrap(name, after) {
+                var orig = window[name];
+                if (typeof orig !== 'function') return; // script.js 未暴露全局函数时静默降级
+                window[name] = function () {
+                    var r = orig.apply(this, arguments);
+                    after();
+                    return r;
+                };
+            }
+
+            wrap('startTimer', startSync);
+            wrap('pauseTimer', restoreTitle);
+            wrap('resetTimer', restoreTitle);
+            wrap('setBreakTime', restoreTitle);
+        })();
+    </script>
 </body>
 </html>
