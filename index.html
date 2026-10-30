@@ -113,5 +113,26 @@
             wrap('setBreakTime', restoreTitle);
         })();
     </script>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="切换深色模式">🌙 夜间模式</button>
+
+    <script>
+        (function () {
+            var toggleBtn = document.getElementById('themeToggle');
+
+            function applyTheme(theme) {
+                document.documentElement.setAttribute('data-theme', theme);
+                toggleBtn.textContent = theme === 'dark' ? '☀️ 日间模式' : '🌙 夜间模式';
+            }
+
+            applyTheme(localStorage.getItem('theme') === 'dark' ? 'dark' : 'light');
+
+            toggleBtn.addEventListener('click', function () {
+                var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+                applyTheme(next);
+                localStorage.setItem('theme', next);
+            });
+        })();
+    </script>
 </body>
 </html>
