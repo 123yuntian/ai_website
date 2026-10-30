@@ -8,7 +8,7 @@
 
 余健琦（Yuntian123）的个人主页，纯 HTML/CSS/JS，**无构建、无依赖、无框架**。
 
-- 目录：`C:\Users\10561\Desktop\ai_day1\`
+- 目录：`C:\Users\10561\Desktop\Personal Website`
 - 线上：`https://www.1bagrice.com`（GitHub Pages，`CNAME` 指向该域名）
 - 远程仓库：`123yuntian/ai_website`
 
